@@ -11,6 +11,21 @@
 
   <ItemGroup>
     <None Remove="Reserva\DatosReserva.Designer.cs~RF117a1e34.TMP" />
+    <None Remove="Resources\Plantilla.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Plantilla.html">
+      <CustomToolNamespace></CustomToolNamespace>
+      <Generator></Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
+    <PackageReference Include="itextsharp.xmlworker" Version="5.5.13.3" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

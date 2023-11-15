@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Entidad.Api;
 using Entidad.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Net.Http.Json;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -37,13 +39,17 @@ namespace Negocio
             return response!;
         }
 
-        public static async Task<Entidad.Models.Habitacion> Create(Entidad.Models.Habitacion hbt)
+        public static async Task<Entidad.Models.Habitacion?> Create(Entidad.Models.Habitacion hbt)
         {
-            Entidad.Api.HabitacionApi hbtApi = GetApi(hbt);
+            HabitacionApi hbtApi = GetApi(hbt);
             var result = await Conexion.http.PostAsJsonAsync(defaultUrl + "Create", hbtApi);
-            int id = JsonConvert.DeserializeObject<int>(await result.Content.ReadAsStringAsync())!;
-            Entidad.Models.Habitacion createdHbt = (await GetOne(id))!;
-            return createdHbt;
+            if (result.IsSuccessStatusCode)
+            {
+                int id = JsonConvert.DeserializeObject<int>(await result.Content.ReadAsStringAsync())!;
+                Entidad.Models.Habitacion createdHbt = (await GetOne(id))!;
+                return createdHbt;
+            }
+            else { return null; }
         }
         public static async Task<bool> Delete(Entidad.Models.Habitacion hbt)
         {

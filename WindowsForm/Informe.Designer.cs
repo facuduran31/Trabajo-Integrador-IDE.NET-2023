@@ -39,6 +39,7 @@
             dtpDesde = new DateTimePicker();
             label2 = new Label();
             dgvInforme = new DataGridView();
+            btnPdf = new Button();
             panel3.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvInforme).BeginInit();
@@ -51,9 +52,8 @@
             panel3.Controls.Add(panel4);
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(0, 0);
-            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(957, 75);
+            panel3.Size = new Size(1094, 100);
             panel3.TabIndex = 4;
             // 
             // lblTitulo
@@ -62,7 +62,7 @@
             lblTitulo.Font = new Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(957, 75);
+            lblTitulo.Size = new Size(1094, 100);
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Informe de recaudación";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -71,18 +71,17 @@
             // 
             panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             panel4.BackColor = Color.White;
-            panel4.Location = new Point(0, 54);
-            panel4.Margin = new Padding(3, 2, 3, 2);
+            panel4.Location = new Point(0, 72);
             panel4.Name = "panel4";
-            panel4.Size = new Size(1534, 8);
+            panel4.Size = new Size(1753, 11);
             panel4.TabIndex = 0;
             // 
             // label1
             // 
             label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            label1.Location = new Point(37, 92);
+            label1.Location = new Point(42, 123);
             label1.Name = "label1";
-            label1.Size = new Size(404, 82);
+            label1.Size = new Size(462, 109);
             label1.TabIndex = 5;
             label1.Text = "Ingrese el rango de fechas sobre el cual desea emitir el informe:";
             // 
@@ -94,19 +93,17 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(dtpDesde);
             panel1.Controls.Add(label2);
-            panel1.Location = new Point(446, 92);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(510, 123);
             panel1.Name = "panel1";
-            panel1.Size = new Size(486, 82);
+            panel1.Size = new Size(555, 109);
             panel1.TabIndex = 7;
             // 
             // btnEmitir
             // 
             btnEmitir.BackColor = Color.LightSeaGreen;
-            btnEmitir.Location = new Point(368, 11);
-            btnEmitir.Margin = new Padding(3, 2, 3, 2);
+            btnEmitir.Location = new Point(421, 15);
             btnEmitir.Name = "btnEmitir";
-            btnEmitir.Size = new Size(100, 46);
+            btnEmitir.Size = new Size(114, 61);
             btnEmitir.TabIndex = 4;
             btnEmitir.Text = "Emitir";
             btnEmitir.UseVisualStyleBackColor = false;
@@ -114,35 +111,33 @@
             // 
             // dtpHasta
             // 
-            dtpHasta.Location = new Point(66, 46);
-            dtpHasta.Margin = new Padding(3, 2, 3, 2);
+            dtpHasta.Location = new Point(75, 61);
             dtpHasta.Name = "dtpHasta";
-            dtpHasta.Size = new Size(274, 23);
+            dtpHasta.Size = new Size(313, 27);
             dtpHasta.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(16, 50);
+            label3.Location = new Point(18, 67);
             label3.Name = "label3";
-            label3.Size = new Size(37, 15);
+            label3.Size = new Size(47, 20);
             label3.TabIndex = 2;
             label3.Text = "Hasta";
             // 
             // dtpDesde
             // 
-            dtpDesde.Location = new Point(66, 8);
-            dtpDesde.Margin = new Padding(3, 2, 3, 2);
+            dtpDesde.Location = new Point(75, 11);
             dtpDesde.Name = "dtpDesde";
-            dtpDesde.Size = new Size(274, 23);
+            dtpDesde.Size = new Size(313, 27);
             dtpDesde.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(16, 11);
+            label2.Location = new Point(18, 15);
             label2.Name = "label2";
-            label2.Size = new Size(39, 15);
+            label2.Size = new Size(51, 20);
             label2.TabIndex = 0;
             label2.Text = "Desde";
             // 
@@ -152,26 +147,37 @@
             dgvInforme.AllowUserToDeleteRows = false;
             dgvInforme.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvInforme.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvInforme.Location = new Point(37, 199);
-            dgvInforme.Margin = new Padding(3, 2, 3, 2);
+            dgvInforme.Location = new Point(42, 265);
             dgvInforme.Name = "dgvInforme";
             dgvInforme.ReadOnly = true;
             dgvInforme.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dgvInforme.RowTemplate.Height = 29;
             dgvInforme.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvInforme.Size = new Size(896, 248);
+            dgvInforme.Size = new Size(1024, 367);
             dgvInforme.TabIndex = 8;
+            // 
+            // btnPdf
+            // 
+            btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPdf.BackColor = Color.LightSeaGreen;
+            btnPdf.Location = new Point(925, 647);
+            btnPdf.Name = "btnPdf";
+            btnPdf.Size = new Size(140, 43);
+            btnPdf.TabIndex = 9;
+            btnPdf.Text = "Descargar PDF";
+            btnPdf.UseVisualStyleBackColor = false;
+            btnPdf.Click += btnPdf_Click;
             // 
             // Informe
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(957, 491);
+            ClientSize = new Size(1094, 702);
+            Controls.Add(btnPdf);
             Controls.Add(dgvInforme);
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(panel3);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "Informe";
             Text = "Informe";
             panel3.ResumeLayout(false);
@@ -194,5 +200,6 @@
         private Label label2;
         private Button btnEmitir;
         private DataGridView dgvInforme;
+        private Button btnPdf;
     }
 }

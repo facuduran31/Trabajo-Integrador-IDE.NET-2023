@@ -15,36 +15,44 @@ namespace Negocio
         static readonly string defaultUrl = Conexion.defaultUrl + "Servicio/";
         public static async Task<Entidad.Models.Servicio?> GetOne(int id)
         {
-            var response = await Conexion.http.GetStringAsync("http://localhost:7110/api/Servicio/GetOne/" + id.ToString());
+            var response = await Conexion.http.GetStringAsync(defaultUrl + "GetOne/" + id.ToString());
             var data = JsonConvert.DeserializeObject<Entidad.Models.Servicio>(response);
+            if (data != null)
+            {
+                await Initialize(data);
+            }
             return data;
         }
         public static async Task<List<Entidad.Models.Servicio>> GetAll() { 
-            var response = await Conexion.http.GetStringAsync("http://localhost:7110/api/Servicio/GetAll/");
+            var response = await Conexion.http.GetStringAsync(defaultUrl + "GetAll");
             var data = JsonConvert.DeserializeObject<List<Entidad.Models.Servicio>>(response);
-            //if(data != null)
-            //{
-            //    foreach (Entidad.Models.Servicio srv in data)
-            //    {
-            //        srv.PrecioServicios = dBContext.PrecioServicios.Where(prcSrv => prcSrv.IdServicio == srv.IdServicio).ToList();
-            //    }
-            //}
+            if(data != null)
+            {
+                foreach (Entidad.Models.Servicio srv in data)
+                {
+                    await Initialize(srv);
+                }
+            }
             return data;
         }
 
-        public static async Task<Entidad.Models.Servicio> Create(Entidad.Models.Servicio srv)
+        public static async Task<Entidad.Models.Servicio?> Create(Entidad.Models.Servicio srv)
         {
             Entidad.Api.ServicioApi srvApi = GetApi(srv);
-            var response = await Conexion.http.PostAsJsonAsync("http://localhost:7110/api/Servicio/Create", srvApi);
-            int data = JsonConvert.DeserializeObject<int>(await response.Content.ReadAsStringAsync());
-            Entidad.Models.Servicio createdServ = (await GetOne(data))!;
-            return createdServ;          
+            var response = await Conexion.http.PostAsJsonAsync(defaultUrl + "Create", srvApi);
+            if (response.IsSuccessStatusCode)
+            {
+                int data = JsonConvert.DeserializeObject<int>(await response.Content.ReadAsStringAsync());
+                Entidad.Models.Servicio createdServ = (await GetOne(data))!;
+                return createdServ;
+            }
+            else { return null; }
         }
         public static async Task<bool> Delete(Entidad.Models.Servicio srv)
         {
             try
             {
-                var result = await Conexion.http.DeleteAsync("http://localhost:7110/api/Servicio/Delete/" + srv.IdServicio);
+                var result = await Conexion.http.DeleteAsync(defaultUrl + "Delete/" + srv.IdServicio);
                 return result.IsSuccessStatusCode;
             }
             catch
@@ -57,7 +65,7 @@ namespace Negocio
             try
             {
                 Entidad.Api.ServicioApi srvApi = GetApi(srv);
-                var response = await Conexion.http.PutAsJsonAsync("http://localhost:7110/api/Servicio/Update/" + srvApi.IdServicio, srvApi);
+                var response = await Conexion.http.PutAsJsonAsync(defaultUrl + "Update/" + srvApi.IdServicio, srvApi);
                 return response.IsSuccessStatusCode;
             }
             catch
@@ -71,22 +79,16 @@ namespace Negocio
         /// <returns>Lista de servicios pertenecientes a la reserva de id ingresado</returns>
         public async static Task<List<Entidad.Models.Servicio>> GetAllOfReserva(int idReserva)
         {
-            List<Entidad.Models.Servicio> lstSrv = new List<Entidad.Models.Servicio>();
-            Task<List<Entidad.Models.ReservaServicio>> getlstRsvSrv = Conexion.http.GetFromJsonAsync<List<Entidad.Models.ReservaServicio>>(defaultUrl + "GetAllOfReserva/" + idReserva)!;
-            List<Entidad.Models.ReservaServicio> lst = await getlstRsvSrv;
-            
-            foreach (var rs in lst)
-            {
-                lstSrv.Add((await GetOne(rs.IdServicio))!);
-            }
+            Task<List<Entidad.Models.Servicio>> getlstRsvSrv = Conexion.http.GetFromJsonAsync<List<Entidad.Models.Servicio>>(defaultUrl + "GetAllOfReserva/" + idReserva)!;
+            List<Entidad.Models.Servicio> lst = await getlstRsvSrv;
 
-            foreach (var srv in lstSrv)
+            foreach (var srv in lst)
             {
                 await Initialize(srv);
             }
             
             //getlstRsvSrv.Wait();
-            return lstSrv;
+            return lst;
         }
 
         /// <summary>

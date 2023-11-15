@@ -1,3 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
+using System.Text;
+
 namespace WindowsForm
 {
     internal static class Program
